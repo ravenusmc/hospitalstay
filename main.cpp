@@ -10,25 +10,74 @@ using namespace std;
 *************************************/
 
 void welcome();
+int numberPatients();
 
 
 int main() {
 
   //Declaring variables to be used with the program. 
-  int number_of_patients; 
+  int number_of_patients; count = 0;
 
+  //This is a simple welcoming message function. 
   welcome()
 
+  //
+  number_of_patients = numberPatients();
 
-}
+  while (count <= number_of_patients){
 
+  }
+
+}//End of main function
+
+/*************************************
+
+Main Functions to use in the program
+
+***********************************/  
+
+//This function will greet the user. 
 void welcome(){
 
+  cout << "-~~~-------~~~-------~~~-------~~~-----" << endl;
+  cout << "-----Welcome to Kingdom Hospital's-----" << endl;
+  cout << "--~~~--~~--Electronic Health Record--~~"
   cout << "---------------------------------------" << endl;
-  cout << "Welcome to Kingdom Hospital's Basic EHR" << endl;
-  cout << "---------------------------------------" << endl;
+  cin >> "Press enter to continue!" << endl;
 
-}
+}// End of welcome function.
+
+//This function will get the 
+int numberPatients(){
+
+  int number;
+
+  cout << "Please enter the number of patients: " << endl;
+  cin >> number;
+  while not validOne(number);
+    cout << "You cannot enter in a negative number!" << endl;
+    cout << "Please enter the number of patients: " << endl;
+    cin >> number;
+
+
+  return number;
+
+}//End of numberpatients function.
+
+/****************************
+
+Validation functions 
+
+****************************/
+
+bool validOne(choice){
+  if (choice < 0){
+    return false;
+  }else {
+    return true;
+  }
+} //End of validOne function 
+
 
 
 
