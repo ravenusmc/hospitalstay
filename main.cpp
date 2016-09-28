@@ -30,7 +30,7 @@ void welcome();
 int numberPatients();
 string patientName();
 int numberOfDays();
-string patient_type();
+int patient_type();
 
 
 
@@ -142,15 +142,19 @@ int numberOfDays(){
 } //End of numberOfDays function
 
 //This function will get the patient type.
-string patient_type(){
+int patient_type(){
     
-    string patient;
+    int patient;
     
-    cout << "What is the patient type: (in-patient/out-patient): " << endl;
+    cout << "What is the patient type: " << endl;
+    cout << "1. in-patient" << endl;
+    cout << "2. out-patient" << endl;
     cin >> patient;
-    while (patient != "in-patient" || patient != "out-patient"){
-        cout << "You must type either in-patient or out-patient" << endl;
-        cout << "What is the patient type: (in-patient/out-patient): " << endl;
+    while (patient < 1 || patient > 2){
+        cout << "You must type either 1 or 2" << endl;
+        cout << "What is the patient type: " << endl;
+        cout << "1. in-patient" << endl;
+        cout << "2. out-patient" << endl;
         cin >> patient;
     }
     
