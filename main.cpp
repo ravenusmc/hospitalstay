@@ -32,15 +32,18 @@ string patientName();
 int numberOfDays();
 int patient_type();
 float dailyrateCharges();
+float medicationCharges();
+float hospitalCharges();
+float total_Charges(float, float, int, float);
 
 //bool validOne();
 
 int main() {
     
     //Declaring variables to be used with the program.
-    int number_of_patients, count = 1, days;
-    string name, patientType;
-    float dailyRate;
+    int number_of_patients, count = 1, days, patientType;
+    string name;
+    float dailyRate, medCharges, hospCharges, totalCharges;
     
     //This is a simple welcoming message function.
     welcome();
@@ -54,13 +57,19 @@ int main() {
         
         patientType = patient_type();
         
-        if (patientType == "in-patient"){
+        if (patientType == 1){
             name = patientName();
             days = numberOfDays();
             dailyRate = dailyrateCharges();
+            medCharges = medicationCharges();
+            hospCharges = hospitalCharges();
+            totalCharges = total_Charges(hospCharges, medCharges, days, dailyRate);
+            
         }
-        else if(patientType == "out-patient"){
+        else if(patientType == 2){
             name = patientName();
+            medCharges = medicationCharges();
+            hospCharges = hospitalCharges();
         }
         
         count++;
@@ -105,8 +114,6 @@ int numberPatients(){
         cin >> number;
     };
 
-    
-    
     return number;
     
 }//End of numberpatients function.
@@ -175,9 +182,48 @@ float dailyrateCharges() {
     }
     
     return number;
-}//End of daily rate charges function. 
+}//End of daily rate charges function.
 
+//This function will get the medication charges for the patient.
+float medicationCharges() {
+    
+    float number;
+    
+    cout << "Please enter the charges for medications: " << endl;
+    cin >> number;
+    while (number < 0){
+        cout << "The number must be greater than or equal to 0" << endl;
+        cout << "Please enter the charges for medications: " << endl;
+        cin >> number;
+    }
+    return number;
+    
+}//End of medicationCharges function.
 
+float hospitalCharges(){
+    
+    float number;
+    
+    cout << "Please enter all charges for hospitals services: " << endl;
+    cin >> number;
+    while (number < 0){
+        cout << "The number must be greater than or equal to 0" << endl;
+        cout << "Please enter all charges for hospitals services: " << endl;
+        cin >> number;
+    }
+    
+    return number;
+    
+}//End of hospitalCharges function.
+
+float total_Charges(float hCharges, float mCharges, int days,  float dRate){
+    float total;
+    
+    total = hCharges + mCharges + (days * dRate);
+    
+    return total;
+
+}
 
 
 
