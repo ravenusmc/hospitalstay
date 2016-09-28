@@ -55,8 +55,13 @@ int main() {
         
         patientType = patient_type();
         
-        name = patientName();
-        days = numberOfDays();
+        if (patientType == "in-patient"){
+            name = patientName();
+            days = numberOfDays();
+        }
+        else if(patientType == "out-patient"){
+            name = patientName();
+        }
         
         count++;
     }
@@ -138,6 +143,18 @@ int numberOfDays(){
 
 //This function will get the patient type.
 string patient_type(){
+    
+    string patient;
+    
+    cout << "What is the patient type: (in-patient/out-patient): " << endl;
+    cin >> patient;
+    while (patient != "in-patient" || patient != "out-patient"){
+        cout << "You must type either in-patient or out-patient" << endl;
+        cout << "What is the patient type: (in-patient/out-patient): " << endl;
+        cin >> patient;
+    }
+    
+    return patient;
     
 }//End of patient_type function.
 
