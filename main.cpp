@@ -31,17 +31,16 @@ int numberPatients();
 string patientName();
 int numberOfDays();
 int patient_type();
-
-
+float dailyrateCharges();
 
 //bool validOne();
-
 
 int main() {
     
     //Declaring variables to be used with the program.
     int number_of_patients, count = 1, days;
     string name, patientType;
+    float dailyRate;
     
     //This is a simple welcoming message function.
     welcome();
@@ -58,6 +57,7 @@ int main() {
         if (patientType == "in-patient"){
             name = patientName();
             days = numberOfDays();
+            dailyRate = dailyrateCharges();
         }
         else if(patientType == "out-patient"){
             name = patientName();
@@ -162,6 +162,20 @@ int patient_type(){
     
 }//End of patient_type function.
 
+//This function will get the daily rate for the patient.
+float dailyrateCharges() {
+    
+    float number;
+    
+    cout << "What was the daily rate: " << endl;
+    cin >> number;
+    while (number < 0){
+        cout << "The number must be greater than or equal to 0" << endl;
+        cin >> number;
+    }
+    
+    return number;
+}//End of daily rate charges function. 
 
 
 
