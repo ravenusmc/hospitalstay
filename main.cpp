@@ -34,7 +34,8 @@ int patient_type();
 float dailyrateCharges();
 float medicationCharges();
 float hospitalCharges();
-float total_Charges(float, float, int, float);
+float total_Charges_in(float, float, int, float);
+float total_Charges_out(float, float);
 
 //bool validOne();
 
@@ -47,6 +48,13 @@ int main() {
     
     //This is a simple welcoming message function.
     welcome();
+    
+    cout << " " << endl;
+    
+    cout << "Patients and what they owe" << endl;
+    cout << " " << endl;
+    cout << "Patient            Owe" << endl;
+    cout << "----------------------" << endl;
     
     //Here this will get the number of patients.
     number_of_patients = numberPatients();
@@ -63,13 +71,14 @@ int main() {
             dailyRate = dailyrateCharges();
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
-            totalCharges = total_Charges(hospCharges, medCharges, days, dailyRate);
+            totalCharges = total_Charges_in(hospCharges, medCharges, days, dailyRate);
             
         }
         else if(patientType == 2){
             name = patientName();
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
+            totalCharges = total_Charges_out(hospCharges, medCharges);
         }
         
         count++;
@@ -216,14 +225,27 @@ float hospitalCharges(){
     
 }//End of hospitalCharges function.
 
-float total_Charges(float hCharges, float mCharges, int days,  float dRate){
+//This function will get the total charges for the in patient.
+float total_Charges_in(float hCharges, float mCharges, int days,  float dRate){
     float total;
     
     total = hCharges + mCharges + (days * dRate);
     
     return total;
 
-}
+} //End of total_Charges_in function
+
+//This function will get the total charges for the out patient.
+float total_Charges_out(float hCharges, float mCharges){
+    
+    float total;
+    
+    total = hCharges + mCharges;
+    
+    return total;
+
+} //End of total_Charges_out function
+
 
 
 
