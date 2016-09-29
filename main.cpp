@@ -30,7 +30,7 @@ void welcome();
 int numberPatients();
 string patientName();
 int numberOfDays();
-int patient_type();
+int patient_type(int);
 float dailyrateCharges();
 float medicationCharges();
 float hospitalCharges();
@@ -56,13 +56,8 @@ int main() {
     
     cout << " " << endl;
     
-    cout << "Patients and what they owe:" << endl;
     outputFile << "Patients and what they owe:" << endl;
-    cout << " " << endl;
-    outputFile << " " << endl;
-    cout << "Patient            Owe" << endl;
     outputFile << "Patient          Owe" << endl;
-    cout << "----------------------" << endl;
     outputFile << "----------------------"  << endl;
     
     //Here this will get the number of patients.
@@ -72,8 +67,11 @@ int main() {
     //The information for each patient.
     while (count <= number_of_patients){
         
-        patientType = patient_type();
+        patientType = patient_type(count);
         
+        //This condition statement will execute code based on whether the patient is
+        //in-patient or out-patient. I thought about using an overloaded function but
+        //just stuck with having seperate functions.
         if (patientType == 1){
             name = patientName();
             days = numberOfDays();
@@ -81,6 +79,10 @@ int main() {
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
             totalCharges = total_Charges_in(hospCharges, medCharges, days, dailyRate);
+            cout << " " << endl;
+            cout << "Patient " << count << " and what they owe: " << endl;
+            cout << "Patient            Owe" << endl;
+            cout << "----------------------" << endl;
             cout << name << "        " << totalCharges << endl;
             outputFile << name << "     " << "$" << totalCharges << endl;
             
@@ -90,12 +92,19 @@ int main() {
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
             totalCharges = total_Charges_out(hospCharges, medCharges);
+            cout << " " << endl;
+            cout << "Patient " << count << " and what they owe: " << endl;
+            cout << "Patient            Owe" << endl;
+            cout << "----------------------" << endl;
             cout << name << "        " << totalCharges << endl;
             outputFile << name << "     " << "$" << totalCharges << endl;
         }
         
         count++;
     }
+    
+    cout << " " << endl;
+    cout << "Please see the medical.txt file to see the data printed there!" << endl;
     
     //Closing the output file.
     outputFile.close();
@@ -182,11 +191,11 @@ int numberOfDays(){
 } //End of numberOfDays function
 
 //This function will get the patient type.
-int patient_type(){
+int patient_type(int count){
     
     int patient;
     
-    cout << "What is the patient type: " << endl;
+    cout << "What is the " << count << " patient type: " << endl;
     cout << "1. in-patient" << endl;
     cout << "2. out-patient" << endl;
     cin >> patient;
