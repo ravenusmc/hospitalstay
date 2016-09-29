@@ -41,6 +41,11 @@ float total_Charges_out(float, float);
 
 int main() {
     
+    ofstream outputFile;
+    
+    //Opening/creating the file to which store the information in this program.
+    outputFile.open("medical.txt");
+    
     //Declaring variables to be used with the program.
     int number_of_patients, count = 1, days, patientType;
     string name;
@@ -51,10 +56,14 @@ int main() {
     
     cout << " " << endl;
     
-    cout << "Patients and what they owe" << endl;
+    cout << "Patients and what they owe:" << endl;
+    outputFile << "Patients and what they owe:" << endl;
     cout << " " << endl;
+    outputFile << " " << endl;
     cout << "Patient            Owe" << endl;
+    outputFile << "Patient          Owe" << endl;
     cout << "----------------------" << endl;
+    outputFile << "----------------------"  << endl;
     
     //Here this will get the number of patients.
     number_of_patients = numberPatients();
@@ -72,6 +81,7 @@ int main() {
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
             totalCharges = total_Charges_in(hospCharges, medCharges, days, dailyRate);
+            outputFile << name << "     " << "$" << totalCharges << endl;
             
         }
         else if(patientType == 2){
@@ -79,10 +89,15 @@ int main() {
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
             totalCharges = total_Charges_out(hospCharges, medCharges);
+            cout << name << "        " << totalCharges << endl;
+            outputFile << name << "     " << "$" << totalCharges << endl;
         }
         
         count++;
     }
+    
+    //Closing the output file.
+    outputFile.close();
     
     //system("pause"); //This line is for Microsoft Visual Studio users.
     
@@ -131,10 +146,15 @@ int numberPatients(){
 //This function will the patients name.
 string patientName() {
     
-    string name;
+    string first_name, last_name, name;
     
-    cout << "Please enter the patients full name: " << endl;
-    cin >> name;
+    cout << "Please enter the patients first name: " << endl;
+    cin >> first_name;
+    
+    cout << "Please enter the patients last name: " << endl;
+    cin >> last_name;
+    
+    name = first_name + " " + last_name;
     
     return name;
     
@@ -144,13 +164,11 @@ string patientName() {
 int numberOfDays(){
     
     int days;
+    
     cout << "Please enter the number of days: " << endl;
     cin >> days;
-    while (days <= 0){
-        cout << "You cannot enter in a value that is less than 0" << endl;
-        cout << "Please enter the number of days: " << endl;
-        cin >> days;
-    }
+    
+
     
     return days;
     
@@ -188,6 +206,7 @@ float dailyrateCharges() {
     while (number < 0){
         cout << "The number must be greater than or equal to 0" << endl;
         cin >> number;
+        return number;
     }
     
     return number;
@@ -204,6 +223,7 @@ float medicationCharges() {
         cout << "The number must be greater than or equal to 0" << endl;
         cout << "Please enter the charges for medications: " << endl;
         cin >> number;
+        return number;
     }
     return number;
     
@@ -219,6 +239,7 @@ float hospitalCharges(){
         cout << "The number must be greater than or equal to 0" << endl;
         cout << "Please enter all charges for hospitals services: " << endl;
         cin >> number;
+        return number;
     }
     
     return number;
@@ -248,21 +269,3 @@ float total_Charges_out(float hCharges, float mCharges){
 
 
 
-
-
-
-
-/****************************
- 
- Validation functions
- 
- ****************************/
-
-//This function will verify that the user is entering the correct values in the program.
-bool validOne(int choice){
-    if (choice < 0){
-        return false;
-    }else {
-        return true;
-    }
-} //End of validOne function
