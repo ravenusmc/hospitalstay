@@ -81,6 +81,7 @@ int main() {
             medCharges = medicationCharges();
             hospCharges = hospitalCharges();
             totalCharges = total_Charges_in(hospCharges, medCharges, days, dailyRate);
+            cout << name << "        " << totalCharges << endl;
             outputFile << name << "     " << "$" << totalCharges << endl;
             
         }
@@ -167,7 +168,12 @@ int numberOfDays(){
     
     cout << "Please enter the number of days: " << endl;
     cin >> days;
-    
+    while (days <= 0){
+        cout << "The number must be greater than 0" << endl;
+        cout << "Please enter the number of days: " << endl;
+        cin >> days;
+        return days;
+    }
 
     
     return days;
@@ -205,6 +211,7 @@ float dailyrateCharges() {
     cin >> number;
     while (number < 0){
         cout << "The number must be greater than or equal to 0" << endl;
+        cout << "What was the daily rate: " << endl;
         cin >> number;
         return number;
     }
